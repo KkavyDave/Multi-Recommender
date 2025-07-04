@@ -22,17 +22,21 @@ def show_books():
     if book_name:
         recs, matched_name = get_book_recs(book_name, books_data, similarity_books, top_n)
         if matched_name:
-            st.subheader(f"Because you like **{matched_name}**:")
-            df = pd.DataFrame(recs, columns=["Book", "Author", "Similarity (%)"])
-            df.index += 1
-            st.table(df)
-            fig, ax = plt.subplots()
-            ax.barh(df["Book"][::-1], df["Similarity (%)"][::-1], color="mediumseagreen")
-            ax.set_xlabel("Similarity (%)")
-            st.pyplot(fig)
+            if recs[0][2] < 20:
+                st.warning("Sorry, we couldn't find close matches. Please try entering a different book title.")
+            else:
+                df = pd.DataFrame(recs, columns=["Book", "Author", "Similarity (%)"])
+                df.index += 1
+                st.table(df)
+                fig, ax = plt.subplots()
+                ax.barh(df["Book"][::-1], df["Similarity (%)"][::-1], color="mediumseagreen")
+                ax.set_xlabel("Similarity (%)")
+                st.pyplot(fig)
         else:
             st.warning("No close match found. Please check the book title.")
+
     st.button("⬅️ Back to Home", on_click=lambda: st.session_state.update({'page': None}))
+
 
 # --------------------------------
 # 🎬 MOVIE PAGE
@@ -45,17 +49,21 @@ def show_movies():
     if movie_name:
         recs, matched_name = get_movie_recs(movie_name, movies_data, similarity_movies, top_n)
         if matched_name:
-            st.subheader(f"Because you like **{matched_name}**:")
-            df = pd.DataFrame(recs, columns=["Movie", "Similarity (%)"])
-            df.index += 1
-            st.table(df)
-            fig, ax = plt.subplots()
-            ax.barh(df["Movie"][::-1], df["Similarity (%)"][::-1], color="skyblue")
-            ax.set_xlabel("Similarity (%)")
-            st.pyplot(fig)
+            if recs[0][1] < 20:
+                st.warning("Sorry, we couldn't find close matches. Please try entering a different movie.")
+            else:
+                df = pd.DataFrame(recs, columns=["Movie", "Similarity (%)"])
+                df.index += 1
+                st.table(df)
+                fig, ax = plt.subplots()
+                ax.barh(df["Movie"][::-1], df["Similarity (%)"][::-1], color="skyblue")
+                ax.set_xlabel("Similarity (%)")
+                st.pyplot(fig)
         else:
             st.warning("No close match found. Please check the movie name.")
+
     st.button("⬅️ Back to Home", on_click=lambda: st.session_state.update({'page': None}))
+
 
 # --------------------------------
 # 🎵 MUSIC PAGE
@@ -68,17 +76,21 @@ def show_music():
     if song_name:
         recs, matched_name = get_music_recs(song_name, music_data, vectorizer_music, feature_vectors_music, top_n)
         if matched_name:
-            st.subheader(f"Because you like **{matched_name}**:")
-            df = pd.DataFrame(recs, columns=["Song", "Artist", "Genre", "Similarity (%)"])
-            df.index += 1
-            st.table(df)
-            fig, ax = plt.subplots()
-            ax.barh(df["Song"][::-1], df["Similarity (%)"][::-1], color="coral")
-            ax.set_xlabel("Similarity (%)")
-            st.pyplot(fig)
+            if recs[0][3] < 20:
+                st.warning("Sorry, we couldn't find close matches. Please try entering a different song.")
+            else:
+                df = pd.DataFrame(recs, columns=["Song", "Artist", "Genre", "Similarity (%)"])
+                df.index += 1
+                st.table(df)
+                fig, ax = plt.subplots()
+                ax.barh(df["Song"][::-1], df["Similarity (%)"][::-1], color="coral")
+                ax.set_xlabel("Similarity (%)")
+                st.pyplot(fig)
         else:
             st.warning("No close match found. Please check the song title.")
+
     st.button("⬅️ Back to Home", on_click=lambda: st.session_state.update({'page': None}))
+
 
 # --------------------------------
 # 🏠 HOME PAGE
