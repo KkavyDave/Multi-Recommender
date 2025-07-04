@@ -14,7 +14,7 @@ st.set_page_config(page_title="Multi Recommender", page_icon="🎬")
 # --------------------------------
 # 📚 BOOK PAGE
 def show_books():
-    st.header("📚 Book Recommendation System")
+    st.header("Book Recommendation System")
     books_data, similarity_books = load_books("data/books.csv")
     book_name = st.text_input("Enter your favourite book:")
     top_n = st.slider("Number of recommendations", 3, 15, 7)
@@ -41,7 +41,7 @@ def show_books():
 # --------------------------------
 # 🎬 MOVIE PAGE
 def show_movies():
-    st.header("🎬 Movie Recommendation System")
+    st.header("Movie Recommendation System")
     movies_data, similarity_movies = load_movies("data/movies.csv")
     movie_name = st.text_input("Enter your favourite movie:")
     top_n = st.slider("Number of recommendations", 3, 15, 7)
@@ -68,7 +68,7 @@ def show_movies():
 # --------------------------------
 # 🎵 MUSIC PAGE
 def show_music():
-    st.header("🎵 Music Recommendation System")
+    st.header("Music Recommendation System")
     music_data, vectorizer_music, feature_vectors_music = load_music("data/SpotifyTracks.csv")
     song_name = st.text_input("Enter your favourite song:")
     top_n = st.slider("Number of recommendations", 3, 15, 7)
@@ -95,24 +95,28 @@ def show_music():
 # --------------------------------
 # 🏠 HOME PAGE
 def show_home():
-    st.title("🎬📚🎵 Multi Recommendation System")
+    st.title(" Multi Recommendation System")
     st.markdown("Select a category below to get started:")
 
     col1, col2, col3 = st.columns([1,1,1])
 
+    # ------------ Books ------------
     with col1:
-        st.image("https://cdn-icons-png.flaticon.com/512/2232/2232688.png", width=120)
-        if st.button("📚 Books", use_container_width=True):
+        if st.button(" Books", use_container_width=True):
             st.session_state['page'] = 'Books'
-    with col2:
-        st.image("https://cdn-icons-png.flaticon.com/512/744/744465.png", width=120)
-        if st.button("🎬 Movies", use_container_width=True):
-            st.session_state['page'] = 'Movies'
-    with col3:
-        st.image("https://cdn-icons-png.flaticon.com/512/727/727245.png", width=120)
-        if st.button("🎵 Music", use_container_width=True):
-            st.session_state['page'] = 'Music'
+        st.image("images.png", width=80)
 
+    # ------------ Movies ------------
+    with col2:
+        if st.button(" Movies", use_container_width=True):
+            st.session_state['page'] = 'Movies'
+        st.image("movie_logo.png", width=80)
+
+    # ------------ Music ------------
+    with col3:
+        if st.button(" Music", use_container_width=True):
+            st.session_state['page'] = 'Music'
+        st.image("Music_logo.png", width=80)
 
 # --------------------------------
 # 🚀 ROUTER
