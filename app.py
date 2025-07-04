@@ -69,7 +69,7 @@ def show_movies():
 # 🎵 MUSIC PAGE
 def show_music():
     st.header("Music Recommendation System")
-    music_data, vectorizer_music, feature_vectors_music = load_music("data/SpotifyTracks.csv")
+    music_data, vectorizer_music, feature_vectors_music = load_music("data/dataset.csv")
     song_name = st.text_input("Enter your favourite song:")
     top_n = st.slider("Number of recommendations", 3, 15, 7)
 
